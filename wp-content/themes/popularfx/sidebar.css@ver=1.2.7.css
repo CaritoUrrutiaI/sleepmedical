@@ -328,16 +328,8 @@ Sidebar for templates
 	font-size: 13px;
 	font-size: 0.8125rem;
 	line-height: 1.6153846154;
-}
-
-.comment-metadata {
 	margin-bottom: 10px;
 	display:inline-block;
-}
-
-.comment-metadata a:hover,
-.comment-metadata a:focus {
-	
 }
 
 .comment-metadata .edit-link {
@@ -387,10 +379,6 @@ Sidebar for templates
 	outline: 0;
 }
 
-.comment-form {
-	/*padding-top: 1.75em;*/
-}
-
 .comment-form label {
 	display: block;
 	font-size: 13px;
@@ -438,11 +426,6 @@ Sidebar for templates
 	margin-left: 10px;
 	text-decoration:none;
 	font-weight:400;
-}
-
-.comment-reply-title small a:hover,
-.comment-reply-title small a:focus {
-	
 }
 
 .comment-form-comment{
