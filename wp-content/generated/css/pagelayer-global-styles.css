@@ -31,12 +31,12 @@ body.pagelayer-body > footer{font-family:Montserrat}
 body.pagelayer-body .entry-header{font-family:Montserrat}
 body.pagelayer-body .entry-content{font-family:Montserrat}
 body.pagelayer-body .entry-footer{font-family:Montserrat}
-body.pagelayer-body h1{font-family:Quicksand;font-size:45px;font-style:normal;font-weight:700}
-body.pagelayer-body h2{font-family:Quicksand;font-size:40px;font-style:normal;font-weight:700}
-body.pagelayer-body h3{font-family:Quicksand;font-size:35px;font-weight:600}
-body.pagelayer-body h4{font-family:Quicksand;font-size:30px;font-weight:500}
-body.pagelayer-body h5{font-family:Quicksand;font-size:27px;font-style:normal;font-weight:500}
-body.pagelayer-body h6{font-family:Quicksand;font-size:24px;font-style:normal;font-weight:500}
+body.pagelayer-body h1{font-family:Quicksand;font-size:45px;font-style:normal;font-weight:700;overflow-wrap:break-word}
+body.pagelayer-body h2{font-family:Quicksand;font-size:40px;font-style:normal;font-weight:700;overflow-wrap:break-word}
+body.pagelayer-body h3{font-family:Quicksand;font-size:35px;font-weight:600;overflow-wrap:break-word}
+body.pagelayer-body h4{font-family:Quicksand;font-size:30px;font-weight:500;overflow-wrap:break-word}
+body.pagelayer-body h5{font-family:Quicksand;font-size:27px;font-style:normal;font-weight:500;overflow-wrap:break-word}
+body.pagelayer-body h6{font-family:Quicksand;font-size:24px;font-style:normal;font-weight:500;overflow-wrap:break-word}
 @media (max-width: 780px){
 	[class^="pagelayer-offset-"],
 	[class*=" pagelayer-offset-"] {
