@@ -1,0 +1,5 @@
+# Commits listed here are ignored by `git blame` when the repo is
+# configured with: git config blame.ignoreRevsFile .git-blame-ignore-revs
+#
+# chore: normalize line endings to LF via .gitattributes
+d947b12238f0b55ef0641afbc9a56480fff193d3
