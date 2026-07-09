@@ -40,3 +40,15 @@ strong, b {
 em, i {
 	font-style: italic;
 }
+
+.sm-header-mobile-info {
+	text-align: center;
+	padding: 0 15px 15px;
+	font-family: Montserrat, sans-serif;
+}
+
+.sm-header-mobile-info div {
+	color: #0986c0;
+	font-size: 13px;
+	line-height: 1.5;
+}
