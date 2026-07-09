@@ -1,0 +1,17 @@
+# Normalize line endings to LF for anything git detects as text.
+* text=auto eol=lf
+
+# Known binary types: never touch, never diff as text.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.avif binary
+*.ico binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.eot binary
+*.otf binary
+*.pdf binary
