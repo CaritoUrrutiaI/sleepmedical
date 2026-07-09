@@ -12,7 +12,6 @@ Espejo estático del sitio WordPress original, generado con `wget --mirror`. Es 
 - `servicios/`, `producto/`, `tienda/`, `arriendo-equipos/`, `contacto-2/`, `categoria-producto/`, `marca/` — páginas del sitio
 - `wp-content/`, `wp-includes/` — assets (temas, plugins, uploads) del WordPress original
 - `wp-content/generated/` — CSS/JS que WordPress inyectaba inline y repetía byte a byte en cada página (boilerplate de core/plugins/tema). Se extrajo a archivos compartidos, referenciados con `<link>`/`<script src>`, para eliminar esa duplicación sin cambiar el resultado renderizado. Ver "Limpieza" más abajo.
-- `index.html@p=NNN.html` — páginas que el sitio servía por query string `?p=NNN`
 - `.nojekyll` — desactiva el procesamiento Jekyll de GitHub Pages (necesario por los nombres `wp-*` y `@`)
 
 ### Código propio vs. vendored
@@ -35,6 +34,7 @@ El mirror venía con mucha duplicación típica de un sitio WordPress exportado 
 - Cada extracción se verificó comparando el contenido extraído byte a byte contra el original, resolviendo las rutas relativas generadas en distintas profundidades de carpeta, y confirmando que ningún `href`/`src` interno del sitio quedó roto (se revisaron ~7300 referencias).
 - En el código propio (los 4 archivos de arriba) se eliminaron reglas CSS muertas (bloques vacíos, una declaración comentada) y se fusionaron dos bloques `.comment-metadata` redundantes en `sidebar.css`.
 - La extracción quedó automatizada en `scripts/extract_inline_assets.py` (sin dependencias, solo `stdlib`). Si se vuelve a capturar el sitio con `wget --mirror`, correr `python3 scripts/extract_inline_assets.py` de nuevo aplica la misma limpieza sobre el HTML nuevo (es idempotente: si ya no queda nada duplicado, no toca nada). `--dry-run` reporta sin escribir, `--clean` borra `wp-content/generated/` antes de regenerar para no dejar archivos huérfanos de una corrida anterior.
+- Se eliminaron las 25 páginas `index.html@p=NNN.html`: eran el mismo post/página que su URL bonita equivalente (el mirror las capturó dos veces porque `wget` siguió tanto la permalink limpia como el shortlink `?p=NNN` que WordPress agrega a cada página). Se confirmó comparando `og:url` y el ID de post embebido en cada una: contenido idéntico salvo la profundidad de rutas relativas. Se reescribieron ~1000 enlaces internos (menú, "productos relacionados", `action` de formularios, `<link rel="canonical">`) que apuntaban a esas URLs para que apunten directo a la URL bonita, y de paso se corrigió un bug preexistente del sitio original: el ítem de menú activo no se resaltaba cuando se entraba por la URL `?p=NNN` porque WordPress comparaba contra la permalink, no contra el ID. Verificado con un barrido de ~4650 referencias internas en las 83 páginas restantes: cero enlaces rotos.
 
 ## Hosting
 
