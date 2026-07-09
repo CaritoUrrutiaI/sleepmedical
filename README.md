@@ -32,8 +32,9 @@ El mirror venía con mucha duplicación típica de un sitio WordPress exportado 
 
 - **19 bloques `<style id="...">` idénticos** en 68 páginas (~1.2 MB de duplicación) se extrajeron a `wp-content/generated/css/*.css`, referenciados con `<link rel='stylesheet'>` en el mismo lugar del `<head>` donde vivía el `<style>` original (mismo orden de cascada).
 - **6 bloques `<script id="...">` clásicos idénticos** (config de WooCommerce/WhatsApp, sin `type` especial) se extrajeron a `wp-content/generated/js/*.js`, referenciados con `<script src>`. Se dejaron inline a propósito los bloques `type="application/json"` / `type="importmap"` (un `src` externo no se llega a cargar para esos tipos, según el spec de HTML) y los que legítimamente varían por página (nonces, IDs de producto, etc.).
-- Cada extracción se verificó comparando el contenido extraído byte a byte contra el original, y resolviendo las rutas relativas generadas en distintas profundidades de carpeta.
+- Cada extracción se verificó comparando el contenido extraído byte a byte contra el original, resolviendo las rutas relativas generadas en distintas profundidades de carpeta, y confirmando que ningún `href`/`src` interno del sitio quedó roto (se revisaron ~7300 referencias).
 - En el código propio (los 4 archivos de arriba) se eliminaron reglas CSS muertas (bloques vacíos, una declaración comentada) y se fusionaron dos bloques `.comment-metadata` redundantes en `sidebar.css`.
+- La extracción quedó automatizada en `scripts/extract_inline_assets.py` (sin dependencias, solo `stdlib`). Si se vuelve a capturar el sitio con `wget --mirror`, correr `python3 scripts/extract_inline_assets.py` de nuevo aplica la misma limpieza sobre el HTML nuevo (es idempotente: si ya no queda nada duplicado, no toca nada). `--dry-run` reporta sin escribir, `--clean` borra `wp-content/generated/` antes de regenerar para no dejar archivos huérfanos de una corrida anterior.
 
 ## Hosting
 
