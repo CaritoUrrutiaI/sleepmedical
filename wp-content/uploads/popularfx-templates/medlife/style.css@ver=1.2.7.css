@@ -52,3 +52,7 @@ em, i {
 	font-size: 13px;
 	line-height: 1.5;
 }
+
+.sm-header-mobile-info i {
+	margin-right: 6px;
+}
