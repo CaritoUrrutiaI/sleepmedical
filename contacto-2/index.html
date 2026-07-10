@@ -835,6 +835,7 @@ var pagelayer_recaptch_version = "";
 </div></div>
 </div></div>
 </div></div>
+</div></div>
 <div pagelayer-id="lKjKWMeeVGeLrxpF" class="p-lKjKWMeeVGeLrxpF pagelayer-row pagelayer-row-stretch-auto pagelayer-height-default">
 <style pagelayer-style-id="lKjKWMeeVGeLrxpF">.p-lKjKWMeeVGeLrxpF > .pagelayer-background-overlay{-webkit-transition: all 400ms !important; transition: all 400ms !important}
 .p-lKjKWMeeVGeLrxpF .pagelayer-row-svg .pagelayer-svg-top{width:195%;height:160px}
@@ -856,14 +857,16 @@ var pagelayer_recaptch_version = "";
 			</div>
 			
 			<div class="pagelayer-row-holder pagelayer-row pagelayer-auto pagelayer-width-auto">
-<div pagelayer-id="VJeugxHAQnhySdrZ" class="p-VJeugxHAQnhySdrZ pagelayer-col pagelayer-hide-mobile">
+<div pagelayer-id="VJeugxHAQnhySdrZ" class="p-VJeugxHAQnhySdrZ pagelayer-col">
 <style pagelayer-style-id="VJeugxHAQnhySdrZ">.pagelayer-row-holder .p-VJeugxHAQnhySdrZ{width: 12%}
 .p-VJeugxHAQnhySdrZ .pagelayer-parallax-window{text-align: center}
 .p-VJeugxHAQnhySdrZ > .pagelayer-background-overlay{-webkit-transition: all 400ms !important; transition: all 400ms !important}
 .p-VJeugxHAQnhySdrZ{padding-top: 0px; padding-right: 15px; padding-bottom: 0px; padding-left: 15px}
-@media (max-width: 780px) and (min-width: 481px){.p-VJeugxHAQnhySdrZ{padding-top: 15px; padding-right: 15px; padding-bottom: 15px; padding-left: 15px}
+@media (max-width: 780px) and (min-width: 481px){.pagelayer-row-holder .p-VJeugxHAQnhySdrZ{width: 100%}
+.p-VJeugxHAQnhySdrZ{padding-top: 15px; padding-right: 15px; padding-bottom: 15px; padding-left: 15px}
 }
-@media (max-width: 480px){.p-VJeugxHAQnhySdrZ{padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px}
+@media (max-width: 480px){.pagelayer-row-holder .p-VJeugxHAQnhySdrZ{width: 100%}
+.p-VJeugxHAQnhySdrZ{padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px}
 }
 </style>
 				
@@ -970,7 +973,42 @@ var pagelayer_recaptch_version = "";
 </div></div>
 </div></div>
 
-<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3112.3667579988305!2d-72.61968992395332!3d-38.73234527175977!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9614d36a49e23de1%3A0xd744a47d225f501d!2sCentro%20de%20Diagn%C3%B3stico%20y%20Medicina%20del%20Sue%C3%B1o!5e0!3m2!1ses!2scl!4v1766087248894!5m2!1ses!2scl" width="2400" height="300" style="border:0; max-width:100%;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+<div id="sm-map-facade" role="button" tabindex="0" aria-label="Cargar mapa de Google Maps" style="position:relative; width:100%; max-width:2400px; height:300px; background:#e5e3df; cursor:pointer; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px;">
+	<i class="fas fa-map-marker-alt" aria-hidden="true" style="font-size:32px; color:#01bcd4;"></i>
+	<span style="font-family:Cabin, sans-serif; font-size:15px; color:#231f20;">Ver mapa interactivo</span>
+</div>
+<script>
+(function(){
+	var facade = document.getElementById('sm-map-facade');
+	if (!facade) return;
+	var loaded = false;
+	function loadMap(){
+		if (loaded) return;
+		loaded = true;
+		var iframe = document.createElement('iframe');
+		iframe.src = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3112.3667579988305!2d-72.61968992395332!3d-38.73234527175977!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9614d36a49e23de1%3A0xd744a47d225f501d!2sCentro%20de%20Diagn%C3%B3stico%20y%20Medicina%20del%20Sue%C3%B1o!5e0!3m2!1ses!2scl!4v1766087248894!5m2!1ses!2scl";
+		iframe.width = "2400";
+		iframe.height = "300";
+		iframe.style.cssText = "border:0; max-width:100%; width:100%; height:300px;";
+		iframe.loading = "lazy";
+		iframe.allowFullscreen = true;
+		iframe.referrerPolicy = "no-referrer-when-downgrade";
+		facade.replaceWith(iframe);
+	}
+	facade.addEventListener('click', loadMap);
+	facade.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); loadMap(); } });
+	if ('IntersectionObserver' in window) {
+		var io = new IntersectionObserver(function(entries){
+			entries.forEach(function(entry){
+				if (entry.isIntersecting) { loadMap(); io.disconnect(); }
+			});
+		}, { rootMargin: '300px' });
+		io.observe(facade);
+	} else {
+		loadMap();
+	}
+})();
+</script>
 	</div><!-- .entry-content -->
 
 	</article><!-- #post-433 -->
