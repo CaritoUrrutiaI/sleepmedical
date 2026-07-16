@@ -56,3 +56,14 @@ em, i {
 .sm-header-mobile-info i {
 	margin-right: 6px;
 }
+
+/* .pagelayer-hide-desktop only hides at >=781px and .pagelayer-hide-mobile
+   only hides at <=480px, leaving a 481-780px gap where both the mobile
+   address block and the desktop address/hours rows show at once. Close
+   that gap for this specific block so it hides as soon as the desktop
+   rows become visible. */
+@media (min-width: 481px) {
+	.sm-header-mobile-info.pagelayer-hide-desktop {
+		display: none !important;
+	}
+}
